@@ -11,7 +11,7 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
-  function handleInputChange(event) {
+  function handleInputIDChange(event) {
     const { value } = event.target;
     const regex = /^\d{0,14}$/; // regular expression to allow only numbers and a maximum of 14 digits
     if (regex.test(value)) {
@@ -19,6 +19,16 @@ function Register() {
         ("not enough");
       }
       setNationalID(value);
+    }
+  }
+  function handleInputMOBChange(event) {
+    const { value } = event.target;
+    const regex = /^\d{0,11}$/; // regular expression to allow only numbers and a maximum of 14 digits
+    if (regex.test(value)) {
+      if (value.length < 11) {
+        ("not enough");
+      }
+      setMobileNumber(value);
     }
   }
 
@@ -57,13 +67,13 @@ function Register() {
           />
         </label>
         <label className={styles.label}>
-          رقم التليفون:
+          رقم الموبايل:
           <input
             type="tel"
             className={styles.input}
             name="mobileNumber"
             value={mobileNumber}
-            onChange={(e) => setMobileNumber(e.target.value)}
+            onChange={handleInputMOBChange}
             required
           />
         </label>
@@ -74,7 +84,7 @@ function Register() {
             className={styles.input}
             name="nationalID"
             value={nationalID}
-            onChange={handleInputChange}
+            onChange={handleInputIDChange}
             required
           />
           {nationalIdError && (
